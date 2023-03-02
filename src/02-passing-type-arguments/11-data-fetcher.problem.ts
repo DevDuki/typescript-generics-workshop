@@ -1,8 +1,11 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
-const fetchData = async (url: string) => {
-  const data = await fetch(url).then((response) => response.json());
+/**
+ * Here we pass our generic function to a more real world use case, to stomp down the "any" type coming from "fetch"
+ */
+const fetchData = async <TData>(url: string) => {
+  const data = await fetch(url).then<TData>((response) => response.json());
   return data;
 };
 
