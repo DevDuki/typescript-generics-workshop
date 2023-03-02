@@ -1,7 +1,12 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
-export const concatenateFirstNameAndLastName = (user: unknown) => {
+/**
+ * Here we see that we can also constrain the generic type to ask for a specific shape of an object. Now the object type that is
+ * actually passed in can also have additional properties here, so it's fully restricting the shape, but it must contain at least the
+ * wanted properties.
+ */
+export const concatenateFirstNameAndLastName = <T extends { firstName: string, lastName: string }>(user: T) => {
   return {
     ...user,
     fullName: `${user.firstName} ${user.lastName}`,
