@@ -1,7 +1,10 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
-const returnBothOfWhatIPassIn = (a: unknown, b: unknown) => {
+/**
+ * Here we can see that we can also use multiple generics
+ */
+const returnBothOfWhatIPassIn = <T1, T2>(a: T1, b: T2) => {
   return {
     a,
     b,
