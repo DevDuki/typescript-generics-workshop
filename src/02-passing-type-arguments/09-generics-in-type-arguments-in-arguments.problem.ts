@@ -11,7 +11,11 @@ export class Component<TProps> {
   getProps = () => this.props;
 }
 
-const cloneComponent = (component: unknown) => {
+/**
+ * Here we can use a generic type to use it as a slot for function arguments that are of a type that takes a generic too. So now we can
+ * infer its type as well, by just passing our generic type in it.
+ */
+const cloneComponent = <T>(component: Component<T>) => {
   return new Component(component.getProps());
 };
 
