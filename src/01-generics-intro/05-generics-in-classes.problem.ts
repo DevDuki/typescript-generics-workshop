@@ -1,10 +1,13 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
-export class Component {
-  private props: unknown;
+/**
+ * Here we use a generic type for a class, to make a property's type generic
+ */
+export class Component<T> {
+  private props: T;
 
-  constructor(props: unknown) {
+  constructor(props: T) {
     this.props = props;
   }
 
