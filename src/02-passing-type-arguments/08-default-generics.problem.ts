@@ -1,6 +1,7 @@
 import { Equal, Expect } from "../helpers/type-utils";
 
-export const createSet = <T>() => {
+/** You can also use default types to your generics. Note that without the default, the default type of a generic is always unknown. */
+export const createSet = <T = string>() => {
   return new Set<T>();
 };
 
