@@ -1,7 +1,11 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
-const returnBothOfWhatIPassIn = (params: { a: unknown; b: unknown }) => {
+/**
+ * Here we see that we can also infer types in specific places. For example here in an object, or if you check the other solutions even
+ * within types and interfaces!
+ */
+const returnBothOfWhatIPassIn = <T1, T2>(params: { a: T1; b: T2 }) => {
   return {
     first: params.a,
     second: params.b,
