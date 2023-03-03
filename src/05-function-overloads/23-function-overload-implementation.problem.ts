@@ -13,9 +13,15 @@ interface AdminPrivileges extends UserPrivileges {
   sitesCanDelete: string[];
 }
 
+/**
+ * Here we see an example again where the implementation is sort of the master of the function overloads. It kind of tells what's
+ * everything possible in it and then the overload functions extract each possibility from it. Important to note here again is that the
+ * implementation function is not visible externally!
+ */
 function getRolePrivileges(role: "admin"): AdminPrivileges;
 function getRolePrivileges(role: "user"): UserPrivileges;
-function getRolePrivileges(role: string): AnonymousPrivileges {
+function getRolePrivileges(role: string): AnonymousPrivileges;
+function getRolePrivileges(role: string): AnonymousPrivileges | UserPrivileges | AdminPrivileges {
   switch (role) {
     case "admin":
       return {
