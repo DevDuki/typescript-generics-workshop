@@ -5,17 +5,17 @@ const acceptsValueOnly = <T>(t: T) => {
 };
 
 const result = acceptsValueOnly("a");
-//    ^?
+//    ^? "a"
 
 const acceptsValueInAnObject = <T>(obj: { input: T }) => {
   return obj.input;
 };
 
 const result2 = acceptsValueInAnObject({ input: "abc" });
-//    ^?
+//    ^? string
 
 const result2WithAsConst = acceptsValueInAnObject({ input: "abc" } as const);
-//    ^?
+//    ^? "abc"
 
 const acceptsValueInAnObjectFieldWithConstraint = <T extends string>(obj: {
   input: T;
@@ -24,7 +24,7 @@ const acceptsValueInAnObjectFieldWithConstraint = <T extends string>(obj: {
 };
 
 const result3 = acceptsValueInAnObjectFieldWithConstraint({ input: "abc" });
-//    ^?
+//    ^? "abc"
 
 const acceptsValueWithObjectConstraint = <
   T extends {
@@ -37,9 +37,9 @@ const acceptsValueWithObjectConstraint = <
 };
 
 const result4 = acceptsValueWithObjectConstraint({ input: "abc" });
+//    ^? string
 
-const result4WithAsConst = acceptsValueWithObjectConstraint({
-  input: "abc",
-} as const);
+const result4WithAsConst = acceptsValueWithObjectConstraint({ input: "abc", } as const);
+//    ^? string
 
 export {};
