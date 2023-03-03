@@ -1,11 +1,15 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
+/**
+ * In this exercise we can see that we can add generics to functions inside interfaces (or types) already (speaking of the "clone"
+ * function below), before we even declare them later on at runtime (in "const createCache")!
+ */
 export interface Cache<T> {
   get: (key: string) => T | undefined;
   set: (key: string, value: T) => void;
   // You can fix this by only changing the line below!
-  clone: (transform: (elem: unknown) => unknown) => Cache<unknown>;
+  clone: <TransformedType>(transform: (elem: T) => TransformedType) => Cache<TransformedType>;
 }
 
 const createCache = <T>(initialCache?: Record<string, T>): Cache<T> => {
