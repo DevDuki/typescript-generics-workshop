@@ -1,6 +1,10 @@
 import { Equal, Expect } from "../helpers/type-utils";
 
-export const inferItemLiteral = <T>(t: T) => {
+/**
+ * Here we restrict the type of T to be a string or number, which makes the return type of "output" to be a literal type and not just a
+ * string or number.
+ */
+export const inferItemLiteral = <T extends string | number>(t: T) => {
   return {
     output: t,
   };
