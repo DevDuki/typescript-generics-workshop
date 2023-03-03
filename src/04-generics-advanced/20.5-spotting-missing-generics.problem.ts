@@ -1,6 +1,11 @@
 import { Equal, Expect } from "../helpers/type-utils";
 
-const getValue = <TObj>(obj: TObj, key: keyof TObj) => {
+/**
+ * Here we see that we had a missing type argument, because we weren't receiving the return type that we expected. Thus, we had to infer
+ * the key of the passed object explicitly, so that we know exactly when this function is being called, which key we are dealing here
+ * with, so we can return exactly the matching type of the value of that key.
+ */
+const getValue = <TObj, TKey extends keyof TObj>(obj: TObj, key: TKey) => {
   return obj[key];
 };
 
