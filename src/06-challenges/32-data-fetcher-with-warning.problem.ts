@@ -1,8 +1,9 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
-const fetchData = async <TResult>(url: string): Promise<TResult> => {
-  const data = await fetch(url).then((response) => response.json());
+/** The sort of "error throwing" here, only works if the type argument has no constraints ("extends"), that does not match a string */
+const fetchData = async <TResult = "You must pass a type argument to fetchData">(url: string): Promise<TResult> => {
+  const data = await fetch(url).then<TResult>((response) => response.json());
   return data;
 };
 
