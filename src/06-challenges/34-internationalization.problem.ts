@@ -9,7 +9,13 @@ type GetParamKeys<TTranslation extends string> = TTranslation extends ""
 type GetParamKeysAsUnion<TTranslation extends string> =
   GetParamKeys<TTranslation>[number];
 
-const translate = (translations: unknown, key: unknown, ...args: unknown[]) => {
+type TranslationRecord = Record<string, string>;
+
+const translate = <TTranslation extends TranslationRecord, TKey extends keyof TTranslation, TDynamicKeys = GetParamKeysAsUnion<TTranslation[TKey]>>(
+  translations: TTranslation,
+  key:  TKey,
+  ...args: TDynamicKeys extends string ? [Record<TDynamicKeys, string>] : []
+) => {
   const translation = translations[key];
   const params: any = args[0] || {};
 
@@ -32,7 +38,7 @@ it("Should translate a translation without parameters", () => {
 
 it("Should translate a translation WITH parameters", () => {
   const subtitle = translate(translations, "subtitle", {
-    count: "2",
+    count: "2"
   });
 
   expect(subtitle).toEqual("You have 2 unread messages.");
