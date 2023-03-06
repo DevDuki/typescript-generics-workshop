@@ -1,6 +1,12 @@
 import { it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
+/**
+ * In this exercise we learned that you can use generics in function overloads. So you can define different variants of the function,
+ * with different amount of generics. Interesting to note, is that you don't even need to define a generic in the implementation function.
+ */
+function returnWhatIPassInExceptFor1(t: 1): 2;
+function returnWhatIPassInExceptFor1<T>(t: T): T;
 function returnWhatIPassInExceptFor1(t: unknown): unknown {
   if (t === 1) {
     return 2;
