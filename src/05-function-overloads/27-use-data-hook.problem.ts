@@ -2,7 +2,14 @@ import { it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
 // You'll need to use function overloads to figure this out!
-function useData<T>(params: { fetchData: () => Promise<T>; initialData?: T }): {
+/**
+ * Here we see again that functions overloads are perfect for cases when u need to return different types based on the arguments that
+ * you pass in. So here we think of the different function core signature, where the initialData is optional. So what we can do, is
+ * split them up into 2 overloads and each return the type we want.
+ */
+function useData<T>(params: { fetchData: () => Promise<T> }): { getData: () => T | undefined; };
+function useData<T>(params: { fetchData: () => Promise<T>, initialData: T }): { getData: () => T; };
+function useData<T>(params: { fetchData: () => Promise<T>, initialData?: T }): {
   getData: () => T | undefined;
 } {
   let data = params.initialData;
